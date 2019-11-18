@@ -12,7 +12,7 @@
         app:cardCornerRadius="@dimen/cardview_default_radius"
         app:cardElevation="@dimen/cardview_default_elevation"
         app:cardUseCompatPadding="true"
-        app:contentPadding="10dp">
+        app:contentPadding="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,32 +21,89 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="173dp"
-                android:layout_weight="1"
-                android:contentDescription="@string/image_caption"
+                android:layout_width="match_parent"
+                android:layout_height="237dp"
                 android:scaleType="centerCrop"
-                tools:src="@tools:sample/backgrounds/scenic" />
+                app:srcCompat="@drawable/milkboy" />
+
+            <TextView
+                android:id="@+id/barName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bar Name - Bar Location" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="3">
 
-                <TextView
-                    android:id="@+id/item_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/text_margin"
-                    android:textAppearance="?attr/textAppearanceListItem" />
+                    <TextView
+                        android:id="@+id/coverLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cover_label"
+                        android:gravity="center"/>
 
+                    <TextView
+                        android:id="@+id/item_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/waitLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wait_label"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:textAppearance="?attr/textAppearanceListItem"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/atmosphereLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/atmosphere_label"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Dead"
+                        android:textAppearance="?attr/textAppearanceListItem" />
+
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
