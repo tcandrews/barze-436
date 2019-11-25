@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "252293190450",
+    "firebase_url": "https://barze-43d98.firebaseio.com",
+    "project_id": "barze-43d98",
+    "storage_bucket": "barze-43d98.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252293190450:android:06b21a9a9f4320ddf87d2b",
+        "android_client_info": {
+          "package_name": "com.example.barze"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252293190450-fdhg8rhtuhkvo69k3g8o12o5fd4crb97.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.barze",
+            "certificate_hash": "87dd3773a045df9be970473c3c7e17db903c5829"
+          }
+        },
+        {
+          "client_id": "252293190450-d1ks0bon6gpromq742qqorgf0otl7jjg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUfa-NWaJ1mpcAU5JDFinJV3VZcXYcUx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252293190450-d1ks0bon6gpromq742qqorgf0otl7jjg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

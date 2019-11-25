@@ -1,6 +1,7 @@
 package com.example.barze.ui.login
 
 import android.app.Activity
+import android.content.Context
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -14,10 +15,23 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.barze.MainActivity
+import android.content.Intent
 
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.example.barze.R
 
 class LoginActivity : AppCompatActivity() {
+    private var mDatabaseReference: DatabaseReference? = null
+    private var mDatabase: FirebaseDatabase? = null
+    private var userEmail: EditText? = null
+    private var userPassword: EditText? = null
+    private var loginBtn: Button? = null
+    private var progressBar: ProgressBar? = null
+
+    private var mBar: FirebaseAuth? = null
 
     private lateinit var loginViewModel: LoginViewModel
 
@@ -25,6 +39,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
+        val sharedPref = getSharedPreferences("BARZE_SETTINGS", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putBoolean("LOGGED_IN", false)
+        editor.apply()
 
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
@@ -101,11 +119,19 @@ class LoginActivity : AppCompatActivity() {
         val welcome = getString(R.string.welcome)
         val displayName = model.displayName
         // TODO : initiate successful logged in experience
+        val sharedPref = getSharedPreferences("BARZE_SETTINGS", Context.MODE_PRIVATE)
+
+        val editor = sharedPref.edit()
+        editor.putBoolean("LOGGED_IN", true)
+        editor.apply()
+
         Toast.makeText(
             applicationContext,
             "$welcome $displayName",
             Toast.LENGTH_LONG
         ).show()
+
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {
