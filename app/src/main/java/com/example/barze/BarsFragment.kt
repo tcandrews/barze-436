@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.barze.data.model.Bar
+import com.example.barze.data.model.BarContent
 
 import com.example.barze.dummy.DummyContent
 import com.example.barze.dummy.DummyContent.DummyItem
@@ -46,7 +48,7 @@ class BarsFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyBarsRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter = MyBarsRecyclerViewAdapter(BarContent.ITEMS, listener)
             }
         }
         return view
@@ -79,7 +81,7 @@ class BarsFragment : Fragment() {
      */
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: BarContent.Bar?)
     }
 
     companion object {

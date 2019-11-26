@@ -7,6 +7,8 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.PopupWindow
+import com.example.barze.data.model.BarContent
 import com.example.barze.dummy.DummyContent
 import com.example.barze.ui.login.LoginActivity
 
@@ -52,10 +54,9 @@ class MainActivity : AppCompatActivity(), BarsFragment.OnListFragmentInteraction
         }
     }
 
-    override fun onListFragmentInteraction(item: DummyContent.DummyItem?) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        Snackbar.make(findViewById(R.id.fragment), "Replace with your own action" + item_number.toString(), Snackbar.LENGTH_LONG)
+    override fun onListFragmentInteraction(item: BarContent.Bar?) {
+        Snackbar.make(findViewById(R.id.fragment), item!!.name, Snackbar.LENGTH_SHORT)
             .setAction("Action", null).show()
-        // pop up launched - hours, happy hour times, link to menu, deals 
+        // TODO pop up launched - hours, happy hour times, link to menu, deals
     }
 }
