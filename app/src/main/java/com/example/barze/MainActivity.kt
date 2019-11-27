@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.fragment_bars.*
 
 class MainActivity : AppCompatActivity(), BarsFragment.OnListFragmentInteractionListener {
 
+    var map_view = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Start login activity if not logged in
         val sharedPref = getSharedPreferences("BARZE_SETTINGS", Context.MODE_PRIVATE)
@@ -48,6 +50,10 @@ class MainActivity : AppCompatActivity(), BarsFragment.OnListFragmentInteraction
         return when(item.itemId) {
             R.id.action_sign_out -> {
                 startActivity(Intent(this, LoginActivity::class.java))
+                true
+            }
+            R.id.map_view-> {
+                map_view = true
                 true
             }
             else -> super.onOptionsItemSelected(item)

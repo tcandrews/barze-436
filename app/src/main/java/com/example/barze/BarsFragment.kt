@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.barze.data.model.Bar
+//import com.example.barze.data.model.Bar
 import com.example.barze.data.model.BarContent
 
 import com.example.barze.dummy.DummyContent
