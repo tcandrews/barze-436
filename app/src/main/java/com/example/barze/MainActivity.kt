@@ -7,9 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.PopupWindow
 import com.example.barze.data.model.BarContent
-import com.example.barze.dummy.DummyContent
 import com.example.barze.ui.login.LoginActivity
 
 import kotlinx.android.synthetic.main.activity_main.*

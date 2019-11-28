@@ -1,5 +1,6 @@
 package com.example.barze
 
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +10,12 @@ import android.widget.TextView
 
 import com.example.barze.BarsFragment.OnListFragmentInteractionListener
 import com.example.barze.data.model.BarContent
-import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.android.synthetic.main.fragment_bars.view.*
 
 /**
  * [RecyclerView.Adapter] that can display a [Bar] and makes a call to the
  * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
  */
 class MyBarsRecyclerViewAdapter(
     private val mValues: List<BarContent.Bar>,
@@ -24,7 +23,7 @@ class MyBarsRecyclerViewAdapter(
 ) : RecyclerView.Adapter<MyBarsRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
-    private val db = FirebaseFirestore.getInstance()
+
     init {
         mOnClickListener = View.OnClickListener { v ->
             val item = v.tag as BarContent.Bar
@@ -42,8 +41,13 @@ class MyBarsRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.name
-        holder.mContentView.text = item.wait.toString()
+        holder.mName.text = item.name
+        holder.mCoverVal.text = item.cover.toString()
+        holder.mWaitVal.text = item.wait.toString()
+        holder.mAtmosphereVal.text = item.atmosphere
+        Log.i("ADAPTER", item.name)
+        Log.i("ADAPTER", item.cover.toString())
+
 
         with(holder.mView) {
             tag = item
@@ -54,11 +58,13 @@ class MyBarsRecyclerViewAdapter(
     override fun getItemCount(): Int = mValues.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+        var mName: TextView = mView.barName
+        var mCoverVal: TextView = mView.coverVal
+        var mWaitVal: TextView = mView.waitVal
+        var mAtmosphereVal: TextView = mView.atmosphereVal
 
         override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
+            return super.toString() + " '" + mName.text + "'"
         }
     }
 }

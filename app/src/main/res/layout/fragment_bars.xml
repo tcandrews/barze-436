@@ -52,7 +52,7 @@
                         android:gravity="center"/>
 
                     <TextView
-                        android:id="@+id/item_number"
+                        android:id="@+id/coverVal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/text_margin"
@@ -74,7 +74,7 @@
                         android:gravity="center"/>
 
                     <TextView
-                        android:id="@+id/content"
+                        android:id="@+id/waitVal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/text_margin"
@@ -96,11 +96,10 @@
                         android:gravity="center"/>
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/atmosphereVal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Dead"
                         android:textAppearance="?attr/textAppearanceListItem" />
 
                 </LinearLayout>

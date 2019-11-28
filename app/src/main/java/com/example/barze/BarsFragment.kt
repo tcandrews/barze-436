@@ -12,9 +12,6 @@ import android.view.ViewGroup
 //import com.example.barze.data.model.Bar
 import com.example.barze.data.model.BarContent
 
-import com.example.barze.dummy.DummyContent
-import com.example.barze.dummy.DummyContent.DummyItem
-
 /**
  * A fragment representing a list of Items.
  * Activities containing this fragment MUST implement the
@@ -48,7 +45,7 @@ class BarsFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyBarsRecyclerViewAdapter(BarContent.ITEMS, listener)
+                adapter = MyBarsRecyclerViewAdapter(BarContent.BARS, listener)
             }
         }
         return view
