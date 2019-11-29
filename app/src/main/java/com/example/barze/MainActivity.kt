@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.example.barze.data.model.BarContent
 import com.example.barze.ui.login.LoginActivity
 
@@ -27,8 +28,9 @@ class MainActivity : AppCompatActivity(), BarsFragment.OnListFragmentInteraction
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            val reviewIntent = Intent(this, ReviewActivity::class.java)
+            startActivity(reviewIntent)
+            //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show()
         }
 
     }

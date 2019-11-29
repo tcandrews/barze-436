@@ -7,6 +7,13 @@
     <string name="atmosphere_label">ATMOSPHERE</string>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>
+    <string name="prompt_name">Bar Name</string>
+    <string name="prompt_hours">Hours</string>
+    <string name="prompt_wait">Wait Time</string>
+    <string name="prompt_cover">Cover Charge</string>
+    <string name="prompt_hh">Happy Hour Times</string>
+    <string name="prompt_deals">Bar Deals</string>
+    <string name="prompt_events">Bar Events</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
