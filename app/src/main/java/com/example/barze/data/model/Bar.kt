@@ -1,7 +1,4 @@
 package com.example.barze.data.model
-import android.util.Log
-import com.google.firebase.firestore.FirebaseFirestore
-import java.util.ArrayList
 
 data class Bar(
     val name: String = "",
