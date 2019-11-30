@@ -1,6 +1,8 @@
 package com.example.barze
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,10 +20,10 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestoreException
 import kotlinx.android.synthetic.main.fragment_bars.view.*
 import java.text.NumberFormat
-import android.widget.ImageButton
 import android.widget.ImageView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.bottom_sheet.view.*
 
 /**
@@ -109,18 +111,21 @@ class BarsFragment : Fragment() {
             holder.mCoverVal.text = NumberFormat.getCurrencyInstance().format(model.cover)
             holder.mWaitVal.text = String.format(resources.getString(R.string.minutes_abbreviation), model.wait)
             holder.mAtmosphereVal.text = model.atmosphere
+
+            holder.setOnClick(model)
+
+            when (model.name) {
+                "R.J. Bentley's Filling Station" -> holder.mImage.setImageResource(R.drawable.bentleys)
+                "Cornerstone Grill & Loft" -> holder.mImage.setImageResource(R.drawable.cornerstone)
+                "Looney's Pub" -> holder.mImage.setImageResource(R.drawable.looneys)
+                "MilkBoy ArtHouse" -> holder.mImage.setImageResource(R.drawable.milkboy)
+                "Terrapin's Turf" -> holder.mImage.setImageResource(R.drawable.turf)
+            }
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BarViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_bars, parent, false)
-            view.setOnClickListener {
-                val dialog = BottomSheetDialog(context!!)
-                val bottomSheet = LayoutInflater.from(parent.context).inflate(R.layout.bottom_sheet, parent, false)
-                bottomSheet.textView.text = view.barName.text
-                dialog.setContentView(bottomSheet)
-                dialog.setCanceledOnTouchOutside(true)
-                dialog.show()
-            }
+//
             return BarViewHolder(view)
         }
 
@@ -130,12 +135,36 @@ class BarsFragment : Fragment() {
         }
     }
 
-    private inner class BarViewHolder internal constructor(mView: View) : RecyclerView.ViewHolder(mView) {
-        var mName: TextView = mView.barName
+    private inner class BarViewHolder internal constructor(val mView: View) : RecyclerView.ViewHolder(mView) {
+        var mName: TextView = mView.name
         var mCoverVal: TextView = mView.coverVal
         var mWaitVal: TextView = mView.waitVal
         var mAtmosphereVal: TextView = mView.atmosphereVal
         var mImage: ImageView = mView.imageView
+
+        fun setOnClick(bar: Bar) {
+            mView.setOnClickListener {
+                val dialog = BottomSheetDialog(context!!)
+                val bottomSheetLayout = LayoutInflater.from(context!!).inflate(R.layout.bottom_sheet, container, false)
+
+                bottomSheetLayout.detailsName.text = bar.name
+                bottomSheetLayout.detailsCoverVal.text = NumberFormat.getCurrencyInstance().format(bar.cover)
+                bottomSheetLayout.detailsWaitVal.text = String.format(resources.getString(R.string.minutes_abbreviation), bar.wait)
+                bottomSheetLayout.detailsAtmosphereVal.text = bar.atmosphere
+                bottomSheetLayout.detailsDealsVal.text = bar.deals
+                bottomSheetLayout.detailsEventsVal.text = bar.events
+                bottomSheetLayout.detailsHappyHourVal.text = bar.happyHour
+                bottomSheetLayout.detailsHoursVal.text = bar.hours
+
+                bottomSheetLayout.menuButton.setOnClickListener {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(bar.menu)))
+                }
+
+                dialog.setContentView(bottomSheetLayout)
+                dialog.setCanceledOnTouchOutside(true)
+                dialog.show()
+            }
+        }
     }
 
     companion object {
