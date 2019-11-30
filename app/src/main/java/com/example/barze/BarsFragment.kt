@@ -2,6 +2,7 @@ package com.example.barze
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,8 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-//import com.example.barze.data.model.Bar
-import com.example.barze.data.model.BarContent
+import android.widget.TextView
+import com.example.barze.data.model.Bar
+
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.FirebaseFirestoreException
+import kotlinx.android.synthetic.main.fragment_bars.view.*
+import java.text.NumberFormat
+import android.widget.ImageButton
+import android.widget.ImageView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.bottom_sheet.view.*
 
 /**
  * A fragment representing a list of Items.
@@ -23,6 +35,7 @@ class BarsFragment : Fragment() {
     private var columnCount = 1
 
     private var listener: OnListFragmentInteractionListener? = null
+    private lateinit var recyclerAdapter: FirestoreRecyclerAdapter<Bar, BarViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +50,6 @@ class BarsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_bars_list, container, false)
-
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
@@ -45,7 +57,17 @@ class BarsFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyBarsRecyclerViewAdapter(BarContent.BARS, listener)
+                val rootRef = FirebaseFirestore.getInstance()
+                val query = rootRef.collection("bars")
+
+                val options = FirestoreRecyclerOptions
+                    .Builder<Bar>()
+                    .setQuery(query, Bar::class.java)
+                    .build()
+                recyclerAdapter = MyBarsRecyclerViewAdapter(options)
+                recyclerAdapter.startListening()
+                adapter = recyclerAdapter
+
             }
         }
         return view
@@ -62,6 +84,7 @@ class BarsFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
+        recyclerAdapter.stopListening()
         listener = null
     }
 
@@ -77,8 +100,42 @@ class BarsFragment : Fragment() {
      * for more information.
      */
     interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: BarContent.Bar?)
+        fun onListFragmentInteraction(item: Bar?)
+    }
+
+    private inner class MyBarsRecyclerViewAdapter internal constructor(options: FirestoreRecyclerOptions<Bar>) : FirestoreRecyclerAdapter<Bar, BarViewHolder>(options) {
+        override fun onBindViewHolder(holder: BarViewHolder, position: Int, model: Bar) {
+            holder.mName.text = model.name
+            holder.mCoverVal.text = NumberFormat.getCurrencyInstance().format(model.cover)
+            holder.mWaitVal.text = String.format(resources.getString(R.string.minutes_abbreviation), model.wait)
+            holder.mAtmosphereVal.text = model.atmosphere
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BarViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_bars, parent, false)
+            view.setOnClickListener {
+                val dialog = BottomSheetDialog(context!!)
+                val bottomSheet = LayoutInflater.from(parent.context).inflate(R.layout.bottom_sheet, parent, false)
+                bottomSheet.textView.text = view.barName.text
+                dialog.setContentView(bottomSheet)
+                dialog.setCanceledOnTouchOutside(true)
+                dialog.show()
+            }
+            return BarViewHolder(view)
+        }
+
+        override fun onError(e: FirebaseFirestoreException) {
+            super.onError(e)
+            Log.e("BarsFragment", e.toString())
+        }
+    }
+
+    private inner class BarViewHolder internal constructor(mView: View) : RecyclerView.ViewHolder(mView) {
+        var mName: TextView = mView.barName
+        var mCoverVal: TextView = mView.coverVal
+        var mWaitVal: TextView = mView.waitVal
+        var mAtmosphereVal: TextView = mView.atmosphereVal
+        var mImage: ImageView = mView.imageView
     }
 
     companion object {

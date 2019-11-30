@@ -30,7 +30,10 @@
                 android:id="@+id/barName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bar Name - Bar Location" />
+                android:gravity="center"
+                android:padding="7dp"
+                android:text="Bar Name - Bar Location"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,16 +51,17 @@
                         android:id="@+id/coverLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/cover_label"
-                        android:gravity="center"/>
+                        android:textColor="@color/colorAccent" />
 
                     <TextView
                         android:id="@+id/coverVal"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/text_margin"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceListItem" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -70,16 +74,17 @@
                         android:id="@+id/waitLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/wait_label"
-                        android:gravity="center"/>
+                        android:textColor="@color/colorAccent" />
 
                     <TextView
                         android:id="@+id/waitVal"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/text_margin"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textAppearance="?attr/textAppearanceListItem" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -92,13 +97,15 @@
                         android:id="@+id/atmosphereLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/atmosphere_label"
-                        android:gravity="center"/>
+                        android:textColor="@color/colorAccent" />
 
                     <TextView
                         android:id="@+id/atmosphereVal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
                         android:gravity="center"
                         android:textAppearance="?attr/textAppearanceListItem" />
 

@@ -23,4 +23,5 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_maps">Map</string>
+    <string name="minutes_abbreviation">%1$s mins.</string>
 </resources>
