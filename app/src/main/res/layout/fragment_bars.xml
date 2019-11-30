@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="237dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/milkboy" />
+                app:srcCompat="@android:drawable/stat_notify_error" />
 
             <TextView
                 android:id="@+id/barName"
