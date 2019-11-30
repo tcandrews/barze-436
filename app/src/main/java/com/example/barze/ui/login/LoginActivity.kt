@@ -17,21 +17,13 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.barze.MainActivity
 import android.content.Intent
-
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.example.barze.R
 
 class LoginActivity : AppCompatActivity() {
-    private var mDatabaseReference: DatabaseReference? = null
-    private var mDatabase: FirebaseDatabase? = null
     private var userEmail: EditText? = null
     private var userPassword: EditText? = null
     private var loginBtn: Button? = null
     private var progressBar: ProgressBar? = null
-
-    private var mBar: FirebaseAuth? = null
 
     private lateinit var loginViewModel: LoginViewModel
 

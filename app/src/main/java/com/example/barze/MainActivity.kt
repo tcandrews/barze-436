@@ -7,7 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.example.barze.data.model.BarContent
+import com.example.barze.data.model.Bar
 import com.example.barze.ui.login.LoginActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), BarsFragment.OnListFragmentInteraction
         }
     }
 
-    override fun onListFragmentInteraction(item: BarContent.Bar?) {
+    override fun onListFragmentInteraction(item: Bar?) {
         Snackbar.make(findViewById(R.id.fragment), item!!.name, Snackbar.LENGTH_SHORT)
             .setAction("Action", null).show()
         // TODO pop up launched - hours, happy hour times, link to menu, deals
