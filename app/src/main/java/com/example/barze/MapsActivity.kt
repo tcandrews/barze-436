@@ -1,32 +1,102 @@
 package com.example.barze
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.barze.ui.login.LoginActivity
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.common.api.GoogleApiClient
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationListener
+import com.google.android.gms.maps.model.*
+import javax.annotation.Nullable
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var mLocationRequest : LocationRequest
+    private lateinit var mLastlocation : Location
+    private lateinit var mGoogleAPIClient : GoogleApiClient
+    var latitude = 0.0
+    var longitude = 0.0
+    private lateinit var mCurrentLocationMarker : Marker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
+        if (CheckGooglePlayServices()) {
+            val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+            mapFragment.getMapAsync(this)
+        }
+        else Toast.makeText(this,"Google Play Serivices not available", Toast.LENGTH_SHORT).show()
+
+        val button = findViewById<Button>(R.id.findNearbyBars)
+        button.setOnClickListener{
+            placeMarkers()
+        }
     }
 
+    private fun CheckGooglePlayServices() :Boolean {
+        val googleAPI = GoogleApiAvailability.getInstance()
+        val result = googleAPI.isGooglePlayServicesAvailable(this)
+        if (result != ConnectionResult.SUCCESS) {
+            if(googleAPI.isUserResolvableError(result)) {
+                googleAPI.getErrorDialog(this, result, 0).show()
+            }
+            return false
+        }
+        return true
+    }
+
+    override fun onLocationChanged(location: Location?) {
+        latitude = location!!.latitude
+        longitude = location!!.longitude
+        mLastlocation = location
+        if (mCurrentLocationMarker != null) {
+            mCurrentLocationMarker.remove()
+        }
+        val latlng = LatLng(latitude, longitude)
+        val markerOptions = MarkerOptions()
+        markerOptions.position(latlng)
+        markerOptions.title("Current Location")
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+        mCurrentLocationMarker = mMap.addMarker(markerOptions)
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng))
+        mMap.animateCamera(CameraUpdateFactory.zoomBy(14.0f))
+
+
+
+    }
+
+    //If we were to fully implement this project this method would help connect to Google Places API
+    //that would cost money to search for locations.
+    /*
+    private fun getURL (latitude:Double, longitude:Double, nearbyPlace:String) {
+        googlePlaceUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googlePlaceUrl.append("location="+latitude+","+longitude);
+        googlePlaceUrl.append("&radius="+PROXIMITY_RADIUS);
+        googlePlaceUrl.append("&type="+nearbyPlace);
+        googlePlaceUrl.append("&sensor=true");
+        googlePlaceUrl.append("&key="+"AIzaSyBLEPBRfw7sMb73Mr88L91Jqh3tuE4mKsE");
+    }
+    */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -53,6 +123,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+
+    override fun onConnected(@Nullable bundle: Bundle?) {
+        mLocationRequest = LocationRequest()
+        mLocationRequest.setInterval(100)
+        mLocationRequest.setFastestInterval(1000)
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+    }
+
+    protected fun buildGoogleAPIClient() {
+        mGoogleAPIClient = GoogleApiClient.Builder(this)
+            .addConnectionCallbacks(this)
+            .addOnConnectionFailedListener(this)
+            .addApi(LocationServices.API)
+            .build()
+    }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -64,10 +157,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        buildGoogleAPIClient()
+        mMap.setMyLocationEnabled(true)
 
-        // Add a marker in Sydney and move the camera
+
+    }
+
+    private fun placeMarkers() {
         val college_park = LatLng(38.9897, -76.9378)
-        mMap.addMarker(MarkerOptions().position(college_park).title("Marker in College Park"))
+        val looneys = LatLng(38.990556, -76.934167)
+        mMap.addMarker(MarkerOptions().position(looneys).title("Looney's Pub"))
+
+        val milkboy = LatLng(38.981389, -76.938056)
+        mMap.addMarker(MarkerOptions().position(milkboy).title("Milkboy ArtHouse"))
+
+        val cornerstone = LatLng(38.980556, -76.938056)
+        mMap.addMarker(MarkerOptions().position(cornerstone).title("Cornerstone Grill & Loft"))
+
+        val bents = LatLng(38.980278, -76.937222)
+        mMap.addMarker(MarkerOptions().position(bents).title("RJ Bentley's Restaurant"))
+
+        val rail = LatLng(38.979722, -76.9375)
+        mMap.addMarker(MarkerOptions().position(rail).title("RJ Bentley's Restaurant"))
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(college_park))
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(16.0f))
     }
 }
