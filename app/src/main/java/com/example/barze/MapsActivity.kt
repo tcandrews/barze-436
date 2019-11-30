@@ -178,7 +178,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleApiClient.Co
         mMap.addMarker(MarkerOptions().position(bents).title("RJ Bentley's Restaurant"))
 
         val rail = LatLng(38.979722, -76.9375)
-        mMap.addMarker(MarkerOptions().position(rail).title("RJ Bentley's Restaurant"))
+        mMap.addMarker(MarkerOptions().position(rail).title("The Rail Sports Bar"))
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(college_park))
         mMap.animateCamera(CameraUpdateFactory.zoomTo(16.0f))
