@@ -1,5 +1,8 @@
 package com.example.barze.data.model
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Bar(
     val name: String = "",
     val cover: Float = 0.0F,
@@ -10,5 +13,5 @@ data class Bar(
     val happyHour: String = "",
     val hours: String = "",
     val menu: String = ""
-)
+) : Parcelable
 

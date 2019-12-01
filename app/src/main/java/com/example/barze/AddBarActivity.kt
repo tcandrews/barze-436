@@ -8,23 +8,18 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_review.*
-import kotlinx.android.synthetic.main.activity_review.toolbar
 import java.util.ArrayList
 
 
-class ReviewActivity : AppCompatActivity() {
-    internal lateinit var buttonAddBar: FloatingActionButton
-    internal val db = FirebaseFirestore.getInstance()
+class AddBarActivity : AppCompatActivity() {
+    private lateinit var buttonAddBar: FloatingActionButton
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_review)
-        setSupportActionBar(toolbar)
 
         buttonAddBar = findViewById<View>(R.id.floatingActionButton) as FloatingActionButton
 
@@ -70,4 +65,7 @@ class ReviewActivity : AppCompatActivity() {
         }
     }
 
+    companion object IDs {
+        val milkboyId = "0jEahS8r5I28NzAS6dl6"
+    }
 }

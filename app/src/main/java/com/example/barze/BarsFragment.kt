@@ -21,7 +21,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import kotlinx.android.synthetic.main.fragment_bars.view.*
 import java.text.NumberFormat
 import android.widget.ImageView
+import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.bottom_sheet.view.*
@@ -163,6 +165,12 @@ class BarsFragment : Fragment() {
                 dialog.setContentView(bottomSheetLayout)
                 dialog.setCanceledOnTouchOutside(true)
                 dialog.show()
+            }
+            mView.setOnLongClickListener {
+                val updateIntent = Intent(context, AddBarActivity::class.java)
+                updateIntent.putExtra("BAR", bar)
+
+                true
             }
         }
     }

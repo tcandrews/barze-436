@@ -25,4 +25,6 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_maps">Map</string>
     <string name="minutes_abbreviation">%1$s mins.</string>
+    <string name="review_activity_title">Report Bar Conditions</string>
+    <string name="title_activity_update_bar">UpdateBarActivity</string>
 </resources>

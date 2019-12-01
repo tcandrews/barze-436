@@ -1,6 +1,5 @@
 package com.example.barze
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +12,6 @@ import com.example.barze.ui.login.LoginActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_bars.*
 
 class MainActivity : AppCompatActivity(), BarsFragment.OnListFragmentInteractionListener {
 
@@ -30,8 +28,8 @@ class MainActivity : AppCompatActivity(), BarsFragment.OnListFragmentInteraction
 
         val button = findViewById<FloatingActionButton>(R.id.fab)
 
-        button.setOnClickListener { view ->
-            val reviewIntent = Intent(this, ReviewActivity::class.java)
+        button.setOnClickListener {
+            val reviewIntent = Intent(this, AddBarActivity::class.java)
             startActivity(reviewIntent)
             //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show()
         }
