@@ -20,64 +20,32 @@
         tools:layout_editor_absoluteX="16dp"/>
 
     <TextView
-        android:id="@+id/review_title"
+        android:id="@+id/update_title"
         android:layout_width="107dp"
         android:layout_height="20dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="Tell Us About A Bar"
         android:textColor="#690002"
         android:textFontWeight="4"
-        app:layout_constraintBottom_toTopOf="@+id/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        app:layout_constraintVertical_bias="0.396" />
-
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints="@string/prompt_name"
-        android:hint="@string/prompt_name"
-        android:inputType="textShortMessage"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/hours"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints="@string/prompt_hours"
-        android:hint="@string/prompt_hours"
-        android:inputType="textShortMessage|time"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <EditText
         android:id="@+id/wait"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:autofillHints="@string/prompt_wait"
         android:hint="@string/prompt_wait"
-        android:inputType="number"
+        android:inputType="number|numberPassword"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hours" />
+        tools:layout_editor_absoluteY="36dp" />
 
     <EditText
         android:id="@+id/cover"
@@ -88,32 +56,17 @@
         android:layout_marginEnd="24dp"
         android:autofillHints="@string/prompt_cover"
         android:hint="@string/prompt_cover"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wait" />
 
-    <EditText
-        android:id="@+id/hh"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:autofillHints="@string/prompt_hh"
-        android:hint="@string/prompt_hh"
-        android:inputType="textShortMessage|time"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cover" />
-
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="36dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintTop_toBottomOf="@+id/cover"
         tools:layout_editor_absoluteX="16dp" />
@@ -179,7 +132,7 @@
     <EditText
         android:id="@+id/deals"
         android:layout_width="240dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:autofillHints="@string/prompt_deals"
         android:ems="10"
@@ -193,7 +146,7 @@
     <EditText
         android:id="@+id/events"
         android:layout_width="240dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:autofillHints="@string/prompt_events"
         android:ems="10"
@@ -204,31 +157,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deals" />
 
-    <EditText
-        android:id="@+id/menu"
-        android:layout_width="240dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
-        android:autofillHints="@string/prompt_menu"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/prompt_menu"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/events" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="4dp"
-        android:clickable="true"
-        android:tint="@android:color/white"
+        android:backgroundTint="@color/colorAccent"
+        android:text="Submit"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_black_24dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

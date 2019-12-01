@@ -158,6 +158,13 @@ class BarsFragment : Fragment() {
                 bottomSheetLayout.detailsHappyHourVal.text = bar.happyHour
                 bottomSheetLayout.detailsHoursVal.text = bar.hours
 
+                bottomSheetLayout.updateButton.setOnClickListener {
+                    val updateIntent = Intent(context, UpdateBarActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putParcelable("BAR", bar)
+                    updateIntent.putExtra("BUNDLE", bundle)
+                    startActivity(updateIntent)
+                }
                 bottomSheetLayout.menuButton.setOnClickListener {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(bar.menu)))
                 }
@@ -167,9 +174,11 @@ class BarsFragment : Fragment() {
                 dialog.show()
             }
             mView.setOnLongClickListener {
-                val updateIntent = Intent(context, AddBarActivity::class.java)
-                updateIntent.putExtra("BAR", bar)
-
+                val updateIntent = Intent(context, UpdateBarActivity::class.java)
+                val bundle = Bundle()
+                bundle.putParcelable("BAR", bar)
+                updateIntent.putExtra("BUNDLE", bundle)
+                startActivity(updateIntent)
                 true
             }
         }
