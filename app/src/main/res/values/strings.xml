@@ -11,6 +11,7 @@
     <string name="prompt_hours">Hours</string>
     <string name="prompt_wait">Wait Time</string>
     <string name="prompt_cover">Cover Charge</string>
+    <string name="prompt_atmosphere">Describe the atmosphere</string>
     <string name="prompt_hh">Happy Hour Times</string>
     <string name="prompt_deals">Bar Deals</string>
     <string name="prompt_events">Bar Events</string>
