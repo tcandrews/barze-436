@@ -48,7 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="24dp"
         android:autofillHints="@string/prompt_name"
         android:hint="@string/prompt_name"
@@ -82,7 +82,7 @@
         android:layout_marginEnd="24dp"
         android:autofillHints="@string/prompt_wait"
         android:hint="@string/prompt_wait"
-        android:inputType="textShortMessage|number"
+        android:inputType="number"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,7 @@
         android:layout_marginEnd="24dp"
         android:autofillHints="@string/prompt_cover"
         android:hint="@string/prompt_cover"
-        android:inputType="textShortMessage|number"
+        android:inputType="number"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +142,7 @@
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="243dp"
-        android:layout_height="130dp"
+        android:layout_height="120dp"
         tools:layout_editor_absoluteX="61dp"
         tools:layout_editor_absoluteY="489dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -187,8 +187,8 @@
 
     <EditText
         android:id="@+id/deals"
-        android:layout_width="271dp"
-        android:layout_height="39dp"
+        android:layout_width="240dp"
+        android:layout_height="35dp"
         android:layout_marginTop="4dp"
         android:autofillHints="@string/prompt_deals"
         android:ems="10"
@@ -202,7 +202,7 @@
     <EditText
         android:id="@+id/events"
         android:layout_width="240dp"
-        android:layout_height="51dp"
+        android:layout_height="35dp"
         android:layout_marginTop="8dp"
         android:autofillHints="@string/prompt_events"
         android:ems="10"
@@ -212,6 +212,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/deals" />
+
+    <EditText
+        android:id="@+id/menu"
+        android:layout_width="240dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="@string/prompt_menu"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/prompt_menu"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/events" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
