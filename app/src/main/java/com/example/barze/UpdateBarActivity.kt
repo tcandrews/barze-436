@@ -10,48 +10,40 @@ import com.google.firebase.firestore.SetOptions
 
 class UpdateBarActivity : AppCompatActivity() {
     private lateinit var submitButton: Button
-    private val db = FirebaseFirestore.getInstance()
-    private val bundle = intent.getBundleExtra("BUNDLE")
-    val bar = bundle!!.getParcelable<Bar>("BAR")
+    val db = FirebaseFirestore.getInstance()
+    private lateinit var atmosphere: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_review)
-        Log.i("UPDATE BAR", bar.toString())
+        setContentView(R.layout.activity_update_bar)
+
+        val bundle = intent?.getBundleExtra("BUNDLE")
+        val bar = bundle?.getParcelable<Bar>("BAR")
+
         val headerText = findViewById<TextView>(R.id.update_title)
         headerText.text = String.format(getString(R.string.update_header), bar!!.name)
 
-        val wait = findViewById<EditText>(R.id.wait)
-        wait.setText(bar.wait)
+        val wait = findViewById<EditText>(R.id.update_wait)
+        wait.setText(bar.wait.toString())
 
-        val cover = findViewById<EditText>(R.id.cover)
-        cover.setText(bar.wait)
+        val cover = findViewById<EditText>(R.id.update_cover)
+        cover.setText(bar.cover.toString())
 
-        val atmosphere = findViewById<RadioGroup>(R.id.radioGroup)
-        val checkedId = atmosphere.checkedRadioButtonId
-        val checkedButton = findViewById<RadioButton>(checkedId)
-
-        val deals = findViewById<EditText>(R.id.deals)
+        val deals = findViewById<EditText>(R.id.update_deals)
         deals.setText(bar.deals)
 
-        val events = findViewById<EditText>(R.id.events)
+        val events = findViewById<EditText>(R.id.update_events)
         events.setText(bar.events)
 
-        submitButton = findViewById(R.id.button)
+        submitButton = findViewById(R.id.update_submit)
 
         submitButton.setOnClickListener {
-            updateBar(hashMapOf(
-                "wait" to wait.text,
-                "cover" to cover.text,
-                "atmosphere" to checkedButton.text,
-                "deals" to deals.text,
-                "events" to events.text
-            ))
+            updateBar(wait.text.toString(), cover.text.toString(), deals.text.toString(), events.text.toString(), bar)
             finish()
         }
     }
 
-    private fun updateBar(data: HashMap<String, Any>) {
+    private fun updateBar(waitText: String, coverText: String, dealsText: String, eventsText: String, bar: Bar) {
         val id = when (bar!!.name) {
             "R.J. Bentley's Filling Station" -> bentleys
             "Cornerstone Grill & Loft" -> cornerstone
@@ -59,6 +51,18 @@ class UpdateBarActivity : AppCompatActivity() {
             "MilkBoy ArtHouse" -> milkboy
             else -> turf
         }
+        val atmosphere = findViewById<RadioGroup>(R.id.update_radioGroup)
+        val checkedId = atmosphere.checkedRadioButtonId
+        val checkedButton = findViewById<RadioButton>(checkedId)
+
+        val data = hashMapOf(
+//            "wait" to waitText,
+            "cover" to coverText.toFloat(),
+            "atmosphere" to checkedButton.text,
+            "deals" to dealsText,
+            "events" to eventsText
+        )
+
         db.collection("bars").document(id).set(data, SetOptions.merge())
     }
 
