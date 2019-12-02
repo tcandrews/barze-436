@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.barze.ui.login.LoginActivity
 import com.google.android.gms.common.ConnectionResult
@@ -39,6 +40,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleApiClient.Co
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION), 2)
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         if (CheckGooglePlayServices()) {
             val mapFragment = supportFragmentManager
@@ -79,7 +84,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleApiClient.Co
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
         mCurrentLocationMarker = mMap.addMarker(markerOptions)
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng))
-        mMap.animateCamera(CameraUpdateFactory.zoomBy(14.0f))
+        mMap.animateCamera(CameraUpdateFactory.zoomBy(13.0f))
 
 
 
@@ -158,8 +163,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleApiClient.Co
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         buildGoogleAPIClient()
-        mMap.setMyLocationEnabled(true)
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
+            mMap.setMyLocationEnabled(true)
+        }
+        else {
+            Toast.makeText(this, "Permission not granted", Toast.LENGTH_LONG).show()
+        }
 
     }
 
@@ -181,6 +192,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleApiClient.Co
         mMap.addMarker(MarkerOptions().position(rail).title("The Rail Sports Bar"))
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(college_park))
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(16.0f))
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(14.0f))
     }
 }
