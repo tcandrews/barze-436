@@ -191,6 +191,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleApiClient.Co
         val rail = LatLng(38.979722, -76.9375)
         mMap.addMarker(MarkerOptions().position(rail).title("The Rail Sports Bar"))
 
+        val turf = LatLng(38.980833, -76.938333)
+        mMap.addMarker(MarkerOptions().position(turf).title("Terrapin's Turf"))
+
+        val tHall = LatLng(38.990833, -76.933333)
+        mMap.addMarker(MarkerOptions().position(tHall).title("Town Hall"))
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(college_park))
         mMap.animateCamera(CameraUpdateFactory.zoomTo(14.0f))
     }

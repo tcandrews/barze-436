@@ -117,7 +117,7 @@ class BarsFragment : Fragment() {
             holder.setOnClick(model, holder)
 
             when (model.name) {
-                "R.J. Bentley's Filling Station" -> holder.mImage.setImageResource(R.drawable.bentleys)
+                "R.J. Bentley's Restaurant" -> holder.mImage.setImageResource(R.drawable.bentleys)
                 "Cornerstone Grill & Loft" -> holder.mImage.setImageResource(R.drawable.cornerstone)
                 "Looney's Pub" -> holder.mImage.setImageResource(R.drawable.looneys)
                 "MilkBoy ArtHouse" -> holder.mImage.setImageResource(R.drawable.milkboy)
