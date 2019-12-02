@@ -122,6 +122,7 @@ class BarsFragment : Fragment() {
                 "Looney's Pub" -> holder.mImage.setImageResource(R.drawable.looneys)
                 "MilkBoy ArtHouse" -> holder.mImage.setImageResource(R.drawable.milkboy)
                 "Terrapin's Turf" -> holder.mImage.setImageResource(R.drawable.turf)
+                else -> holder.mImage.setImageResource(R.drawable.barzebackground)
             }
         }
 
