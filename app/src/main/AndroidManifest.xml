@@ -25,15 +25,6 @@
                 android:value="com.example.barze.MainActivity" />
         </activity>
         <activity
-            android:name=".DeleteBarActivity"
-            android:label="@string/title_activity_delete_bar"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.barze.MainActivity" />
-        </activity>
-        <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
 
