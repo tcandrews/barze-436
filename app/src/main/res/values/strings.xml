@@ -28,5 +28,6 @@
     <string name="minutes_abbreviation">%1$s mins.</string>
     <string name="review_activity_title">Report Bar Conditions</string>
     <string name="title_activity_update_bar">UpdateBarActivity</string>
+    <string name="title_activity_delete_bar">DeleteBarActivity</string>
     <string name="update_header">Tell us about the conditions at %1$s.</string>
 </resources>

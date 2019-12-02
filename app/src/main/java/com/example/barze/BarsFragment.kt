@@ -168,6 +168,14 @@ class BarsFragment : Fragment() {
                 bottomSheetLayout.menuButton.setOnClickListener {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(bar.menu)))
                 }
+                bottomSheetLayout.deleteButton.setOnClickListener {
+                    val deleteIntent = Intent(context, DeleteBarActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putParcelable("BAR", bar)
+                    deleteIntent.putExtra("BUNDLE", bundle)
+                    startActivity(deleteIntent)
+
+                }
 
                 dialog.setContentView(bottomSheetLayout)
                 dialog.setCanceledOnTouchOutside(true)

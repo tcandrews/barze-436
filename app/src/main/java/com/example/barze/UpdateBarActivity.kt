@@ -37,6 +37,7 @@ class UpdateBarActivity : AppCompatActivity() {
 
         submitButton = findViewById(R.id.update_submit)
 
+
         submitButton.setOnClickListener {
             updateBar(wait.text.toString(), cover.text.toString(), deals.text.toString(), events.text.toString(), bar)
             finish()
@@ -49,6 +50,7 @@ class UpdateBarActivity : AppCompatActivity() {
             "Cornerstone Grill & Loft" -> cornerstone
             "Looney's Pub" -> looneys
             "MilkBoy ArtHouse" -> milkboy
+            "El Rey" -> elrey
             else -> turf
         }
         val atmosphere = findViewById<RadioGroup>(R.id.update_radioGroup)
@@ -72,5 +74,6 @@ class UpdateBarActivity : AppCompatActivity() {
         const val looneys = "CnNysrPTK1faLI6Z8imP"
         const val milkboy = "0jEahS8r5I28NzAS6dl6"
         const val turf = "i1uIEMLH4NiK89DwDGnb"
+        const val elrey = "kZeheKVslY1Wx8uepugG"
     }
 }

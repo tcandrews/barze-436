@@ -37,11 +37,14 @@ class AddBarActivity : AppCompatActivity() {
         val deals = findViewById<EditText>(R.id.deals).text.toString()
         val events = findViewById<EditText>(R.id.events).text.toString()
         val menu = findViewById<EditText>(R.id.menu).text.toString()
-        val atmosphere = findViewById<EditText>(R.id.atm).text.toString()
+        val atmosphere = findViewById<RadioGroup>(R.id.radio)
+
+        val checkedId = atmosphere.checkedRadioButtonId
+        val checkedButtonText = findViewById<RadioButton>(checkedId).text.toString()
 
 
         if (!TextUtils.isEmpty(barName)) {
-            val bar = com.example.barze.data.model.Bar(barName, cover, atmosphere, wait, deals, events, hh, hours, menu)
+            val bar = com.example.barze.data.model.Bar(barName, cover, checkedButtonText, wait, deals, events, hh, hours, menu)
             db.collection("bars").document().set(bar)
 
             val intent = Intent(applicationContext, MainActivity::class.java)

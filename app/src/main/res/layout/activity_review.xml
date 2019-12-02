@@ -137,20 +137,40 @@
             app:layout_constraintTop_toBottomOf="@+id/divider"
             app:layout_constraintVertical_bias="0.704" />
 
-        <EditText
-            android:id="@+id/atm"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:autofillHints="@string/prompt_atmosphere"
-            android:hint="@string/prompt_atmosphere"
-            android:inputType="textShortMessage"
-            android:selectAllOnFocus="true"
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="243dp"
+            android:layout_height="120dp"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="489dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/atmosphere" />
+            app:layout_constraintTop_toBottomOf="@+id/atmosphere">
+
+            <RadioButton
+                android:id="@+id/dead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dead" />
+
+            <RadioButton
+                android:id="@+id/vibin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Just Vibin'" />
+
+            <RadioButton
+                android:id="@+id/lit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lit!" />
+
+            <RadioButton
+                android:id="@+id/packed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Too Packed" />
+        </RadioGroup>
 
         <TextView
             android:id="@+id/details"
@@ -161,7 +181,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/atm" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <EditText
             android:id="@+id/deals"
