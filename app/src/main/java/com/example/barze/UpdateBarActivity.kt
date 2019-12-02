@@ -1,5 +1,6 @@
 package com.example.barze
 
+import android.net.Uri.encode
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
@@ -45,20 +46,13 @@ class UpdateBarActivity : AppCompatActivity() {
     }
 
     private fun updateBar(waitText: String, coverText: String, dealsText: String, eventsText: String, bar: Bar) {
-        val id = when (bar!!.name) {
-            "R.J. Bentley's Filling Station" -> bentleys
-            "Cornerstone Grill & Loft" -> cornerstone
-            "Looney's Pub" -> looneys
-            "MilkBoy ArtHouse" -> milkboy
-            "El Rey" -> elrey
-            else -> turf
-        }
+        val id = encode(bar.name)
         val atmosphere = findViewById<RadioGroup>(R.id.update_radioGroup)
         val checkedId = atmosphere.checkedRadioButtonId
         val checkedButton = findViewById<RadioButton>(checkedId)
 
         val data = hashMapOf(
-//            "wait" to waitText,
+            "wait" to waitText.toInt(),
             "cover" to coverText.toFloat(),
             "atmosphere" to checkedButton.text,
             "deals" to dealsText,
@@ -66,14 +60,5 @@ class UpdateBarActivity : AppCompatActivity() {
         )
 
         db.collection("bars").document(id).set(data, SetOptions.merge())
-    }
-
-    companion object {
-        const val bentleys = "cW18KjrrOqTBHQH8UGfX"
-        const val cornerstone = "oD0jG3JTcnQ6MRteOhYa"
-        const val looneys = "CnNysrPTK1faLI6Z8imP"
-        const val milkboy = "0jEahS8r5I28NzAS6dl6"
-        const val turf = "i1uIEMLH4NiK89DwDGnb"
-        const val elrey = "kZeheKVslY1Wx8uepugG"
     }
 }

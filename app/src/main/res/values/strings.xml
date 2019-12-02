@@ -30,4 +30,6 @@
     <string name="title_activity_update_bar">UpdateBarActivity</string>
     <string name="title_activity_delete_bar">DeleteBarActivity</string>
     <string name="update_header">Tell us about the conditions at %1$s.</string>
+    <string name="delete_conf">Are you sure you want to delete?</string>
+
 </resources>

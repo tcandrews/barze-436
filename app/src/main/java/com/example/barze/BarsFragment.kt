@@ -21,12 +21,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import kotlinx.android.synthetic.main.fragment_bars.view.*
 import java.text.NumberFormat
 import android.widget.ImageView
-import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.bottom_delete.view.*
 import kotlinx.android.synthetic.main.bottom_sheet.view.*
+import kotlinx.android.synthetic.main.bottom_sheet.view.detailsName
 
 /**
  * A fragment representing a list of Items.
@@ -114,7 +114,7 @@ class BarsFragment : Fragment() {
             holder.mWaitVal.text = String.format(resources.getString(R.string.minutes_abbreviation), model.wait)
             holder.mAtmosphereVal.text = model.atmosphere
 
-            holder.setOnClick(model)
+            holder.setOnClick(model, holder)
 
             when (model.name) {
                 "R.J. Bentley's Filling Station" -> holder.mImage.setImageResource(R.drawable.bentleys)
@@ -144,7 +144,7 @@ class BarsFragment : Fragment() {
         var mAtmosphereVal: TextView = mView.atmosphereVal
         var mImage: ImageView = mView.imageView
 
-        fun setOnClick(bar: Bar) {
+        fun setOnClick(bar: Bar, viewHolder: BarViewHolder) {
             mView.setOnClickListener {
                 val dialog = BottomSheetDialog(context!!)
                 val bottomSheetLayout = LayoutInflater.from(context!!).inflate(R.layout.bottom_sheet, container, false)
@@ -163,17 +163,32 @@ class BarsFragment : Fragment() {
                     val bundle = Bundle()
                     bundle.putParcelable("BAR", bar)
                     updateIntent.putExtra("BUNDLE", bundle)
+                    dialog.dismiss()
                     startActivity(updateIntent)
+
                 }
                 bottomSheetLayout.menuButton.setOnClickListener {
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(bar.menu)))
                 }
                 bottomSheetLayout.deleteButton.setOnClickListener {
-                    val deleteIntent = Intent(context, DeleteBarActivity::class.java)
-                    val bundle = Bundle()
-                    bundle.putParcelable("BAR", bar)
-                    deleteIntent.putExtra("BUNDLE", bundle)
-                    startActivity(deleteIntent)
+//                    val deleteIntent = Intent(context, DeleteBarActivity::class.java)
+//                    val bundle = Bundle()
+//                    bundle.putParcelable("BAR", bar)
+//                    deleteIntent.putExtra("BUNDLE", bundle)
+//                    startActivity(deleteIntent)
+                    val deleteDialog = BottomSheetDialog(context!!)
+                    val deleteView = LayoutInflater.from(context!!).inflate(R.layout.bottom_delete, container, false)
+                    deleteDialog.setContentView(deleteView)
+                    deleteDialog.show()
+                    deleteView.yes.setOnClickListener {
+                        viewHolder.remove()
+                        deleteDialog.dismiss()
+                        dialog.dismiss()
+                    }
+
+                    deleteView.no.setOnClickListener {
+                        deleteDialog.dismiss()
+                    }
 
                 }
 
@@ -189,6 +204,12 @@ class BarsFragment : Fragment() {
                 startActivity(updateIntent)
                 true
             }
+        }
+
+        fun remove() {
+            val cardView = mView.card
+            cardView.visibility = View.GONE
+
         }
     }
 

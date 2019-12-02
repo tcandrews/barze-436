@@ -1,6 +1,7 @@
 package com.example.barze
 
 import android.content.Intent
+import android.net.Uri.encode
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -37,15 +38,15 @@ class AddBarActivity : AppCompatActivity() {
         val deals = findViewById<EditText>(R.id.deals).text.toString()
         val events = findViewById<EditText>(R.id.events).text.toString()
         val menu = findViewById<EditText>(R.id.menu).text.toString()
-        val atmosphere = findViewById<RadioGroup>(R.id.radio)
+        val atmosphere = findViewById<RadioGroup>(R.id.radioGroup)
 
         val checkedId = atmosphere.checkedRadioButtonId
         val checkedButtonText = findViewById<RadioButton>(checkedId).text.toString()
-
+        val id = encode(barName)
 
         if (!TextUtils.isEmpty(barName)) {
             val bar = com.example.barze.data.model.Bar(barName, cover, checkedButtonText, wait, deals, events, hh, hours, menu)
-            db.collection("bars").document().set(bar)
+            db.collection("bars").document(id).set(bar)
 
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
@@ -55,9 +56,5 @@ class AddBarActivity : AppCompatActivity() {
             //if the value is not given displaying a toast
             Toast.makeText(this, "Please enter in field", Toast.LENGTH_LONG).show()
         }
-    }
-
-    companion object IDs {
-        val milkboyId = "0jEahS8r5I28NzAS6dl6"
     }
 }
